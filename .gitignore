@@ -1,0 +1,16 @@
+.idea
+.DS_Store
+out/
+*.class
+*.log
+*.jar
+*.zip
+*.tar.gz
+*.rar
+.gradle
+**/build/
+gradle-app.setting
+
+!src/**/build/
+!gradle-wrapper.jar
+!gradle-wrapper.properties
