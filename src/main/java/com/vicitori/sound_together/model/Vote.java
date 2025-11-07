@@ -13,7 +13,7 @@ public class Vote {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long voteID;
+    private Long vote_id;
 
     private int rate;
 
