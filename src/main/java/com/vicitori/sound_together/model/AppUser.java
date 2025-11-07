@@ -11,18 +11,18 @@ import java.util.ArrayList;
 @Setter
 @Getter
 @NoArgsConstructor
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userID;
+    private Long user_id;
 
-    private String userName;
+    private String user_name;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "app_user")
     private ArrayList<Vote> votes = new ArrayList<>();
 
-    User(String name) {
-        this.userName = name;
+    AppUser(String name) {
+        this.user_name = name;
     }
 }

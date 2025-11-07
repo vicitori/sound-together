@@ -19,7 +19,7 @@ public class Vote {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private AppUser app_user;
 
     Vote(int rate) {
         this.rate = rate;
