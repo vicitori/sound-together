@@ -17,17 +17,17 @@ public class Playlist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long plist_id;
+    private Long plistId;
 
-    private String plist_name;
-    private String plist_link;
+    private String plistName;
+    private String plistLink;
 
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
     private List<Track> tracks = new ArrayList<>();
 
     public Playlist(String name) {
-        this.plist_name = name;
-        this.plist_link = generateLink();
+        this.plistName = name;
+        this.plistLink = generateLink();
     }
 
     private String generateLink() {

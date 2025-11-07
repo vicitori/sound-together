@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Setter
@@ -15,14 +16,14 @@ public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    private Long userId;
 
-    private String user_name;
+    private String userName;
 
-    @OneToMany(mappedBy = "app_user")
-    private ArrayList<Vote> votes = new ArrayList<>();
+    @OneToMany(mappedBy = "appUser")
+    private List<Vote> votes = new ArrayList<>();
 
-    AppUser(String name) {
-        this.user_name = name;
+    public AppUser(String name) {
+        this.userName = name;
     }
 }

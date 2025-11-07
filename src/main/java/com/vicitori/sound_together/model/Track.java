@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Setter
 @Getter
@@ -13,23 +16,30 @@ public class Track {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long track_id;
+    private Long trackId;
 
-    private String track_name;
-    private String track_link;
-    private String added_by;
+    private String trackName;
+    private String trackLink;
+    private String addedBy;
 
     @ManyToOne
     @JoinColumn(name = "playlist_id")
     private Playlist playlist;
 
-    Track(String name) {
-        this.track_name = name;
-        this.track_link = null;
+    @OneToMany(mappedBy = "track", cascade = CascadeType.ALL)
+    private List<Vote> votes = new ArrayList<>();
+
+    public Track(String name, String addedBy, Playlist playlist) {
+        this.trackName = name;
+        this.addedBy = addedBy;
+        this.playlist = playlist;
+        this.trackLink = null;
     }
 
-    Track(String name, String link) {
-        this.track_name = name;
-        this.track_link = link;
+    public Track(String name, String addedBy, Playlist playlist, String link) {
+        this.trackName = name;
+        this.addedBy = addedBy;
+        this.playlist = playlist;
+        this.trackLink = link;
     }
 }
