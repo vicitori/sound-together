@@ -7,7 +7,7 @@ import java.util.Optional;
 
 @Repository
 public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
-    Optional<Playlist> findByPlstName(String plstName);
-    Optional<Playlist> findByPlstShareCode(String plstShareCode);
-    boolean existsByPlstShareCode(String plstShareCode);
+    Optional<Playlist> findByPlistName(String plistName);
+    Optional<Playlist> findByPlistShareCode(String plistShareCode);
+    boolean existsByPlistShareCode(String plistShareCode);
 }

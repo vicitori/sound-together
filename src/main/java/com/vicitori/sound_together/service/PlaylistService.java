@@ -20,15 +20,15 @@ public class PlaylistService {
     }
 
     public String getPlistLink(String name) {
-        Playlist pl = repository.findByPlstName(name).orElseThrow(() -> new RuntimeException("playlist '" + name + "' not found :( try input other name."));
+        Playlist pl = repository.findByPlistName(name).orElseThrow(() -> new RuntimeException("playlist '" + name + "' not found :( try input other name."));
         return pl.getShareUrl();
     }
 
     public Boolean existsByShareCode(String shareCode) {
-        return repository.existsByPlstShareCode(shareCode);
+        return repository.existsByPlistShareCode(shareCode);
     }
 
     public Optional<Playlist> getPlistByShareCode(String shareCode) {
-        return repository.findByPlstShareCode(shareCode);
+        return repository.findByPlistShareCode(shareCode);
     }
 }
