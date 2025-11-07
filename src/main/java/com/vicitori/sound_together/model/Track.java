@@ -20,10 +20,16 @@ public class Track {
     private String addedBy;
 
     @ManyToOne
-    @JoinColumn(name = "plistID")
+    @JoinColumn(name = "playlist_id")
     private Playlist playlist;
 
     Track(String name) {
         this.trackName = name;
+        this.trackLink = null;
+    }
+
+    Track(String name, String link) {
+        this.trackName = name;
+        this.trackLink = link;
     }
 }
