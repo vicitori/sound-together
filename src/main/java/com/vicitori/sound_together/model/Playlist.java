@@ -20,17 +20,21 @@ public class Playlist {
     private Long plistId;
 
     private String plistName;
-    private String plistLink;
+    private String plistShareCode;
 
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
     private List<Track> tracks = new ArrayList<>();
 
     public Playlist(String name) {
         this.plistName = name;
-        this.plistLink = generateLink();
+        this.plistShareCode = generateShareCode();
     }
 
-    private String generateLink() {
+    public String getShareUrl() {
+        return "http://localhost:8080/playlist/" + this.plistShareCode;
+    }
+
+    private String generateShareCode() {
         return UUID.randomUUID().toString().substring(0, 8);
     }
 }
