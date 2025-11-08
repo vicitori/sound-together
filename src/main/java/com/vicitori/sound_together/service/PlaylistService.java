@@ -4,6 +4,7 @@ import com.vicitori.sound_together.model.Playlist;
 import com.vicitori.sound_together.repository.PlaylistRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,5 +31,9 @@ public class PlaylistService {
 
     public Optional<Playlist> getPlistByShareCode(String shareCode) {
         return repository.findByPlistShareCode(shareCode);
+    }
+
+    public List<Playlist> getAllPlaylists() {
+        return repository.findAll();
     }
 }
