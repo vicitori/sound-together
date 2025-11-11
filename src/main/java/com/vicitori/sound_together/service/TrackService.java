@@ -3,6 +3,7 @@ package com.vicitori.sound_together.service;
 import com.vicitori.sound_together.model.Playlist;
 import com.vicitori.sound_together.model.Track;
 import com.vicitori.sound_together.repository.TrackRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -11,24 +12,26 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class TrackService {
-    private PlaylistService plService;
-    private VoteService voteService;
-    private TrackRepository repository;
-
-    public TrackService(PlaylistService plService, TrackRepository repository) {
-        this.plService = plService;
-        this.repository = repository;
-    }
+    private final PlaylistService plService;
+    private final VoteService voteService;
+    private final TrackRepository repository;
 
     public Optional<Track> getTrackById(Long id) {
         return repository.findById(id);
     }
 
-    public Track addTrack(String name, String addedBy, String plistShareCode) {
+    public void addTrack(String name, String addedBy, String plistShareCode) {
         Playlist pl = plService.getPlistByShareCode(plistShareCode).orElseThrow(() -> new RuntimeException("playlist with share code " + plistShareCode + " not found. try to input share code again."));
         Track track = new Track(name, addedBy, pl);
-        return repository.save(track);
+        repository.save(track);
+    }
+
+    public void addTrackWithLink(String name, String addedBy, String plistShareCode, String link) {
+        Playlist pl = plService.getPlistByShareCode(plistShareCode).orElseThrow(() -> new RuntimeException("playlist with share code " + plistShareCode + " not found. try to input share code again."));
+        Track track = new Track(name, addedBy, pl, link);
+        repository.save(track);
     }
 
     public List<Track> getTracksFromPlaylist(String plistShareCode) {
