@@ -15,8 +15,16 @@ public class TrackController {
     }
 
     @PostMapping("/playlists/{plistShareCode}/tracks")
-    public String addTrack(@PathVariable String plistShareCode, @RequestParam String name, @RequestParam String addedBy) {
-        service.addTrack(name, addedBy, plistShareCode);
+    public String addTrack(
+            @PathVariable String plistShareCode,
+            @RequestParam String name,
+            @RequestParam String addedBy,
+            @RequestParam(required = false) String link) {
+        if (link != null && !link.trim().isEmpty()) {
+            service.addTrackWithLink(name, addedBy, plistShareCode, link);
+        } else {
+            service.addTrack(name, addedBy, plistShareCode);
+        }
         return "redirect:/playlists/" + plistShareCode;
     }
 }

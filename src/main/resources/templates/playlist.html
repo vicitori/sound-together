@@ -3,431 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${playlist.plistName}">Playlist - Sound Together</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://i.pinimg.com/736x/b4/bb/7c/b4bb7cd54de59370aef889f3240790d7.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: -2;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 40px;
-            margin-top: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow:
-                0 25px 50px rgba(0, 0, 0, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        .header {
-            margin-bottom: 40px;
-        }
-
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            color: #ffffff;
-            text-decoration: none;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .back-button:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .playlist-info {
-            display: flex;
-            justify-content: between;
-            align-items: flex-start;
-            margin-bottom: 30px;
-        }
-
-        .playlist-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: #ffffff;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            margin-bottom: 10px;
-        }
-
-        .playlist-meta {
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .share-info {
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(15px);
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            margin-bottom: 30px;
-        }
-
-        .share-code {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        .share-url {
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
-            word-break: break-all;
-        }
-
-        .actions {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .action-button {
-            padding: 15px 25px;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(15px);
-            color: #ffffff;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            border-radius: 12px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .action-button:hover {
-            background: rgba(255, 255, 255, 0.35);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: translateY(-2px);
-        }
-
-        .add-track-form {
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            margin-bottom: 30px;
-            display: none;
-        }
-
-        .add-track-form.visible {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        input {
-            width: 100%;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            color: #ffffff;
-            transition: all 0.3s ease;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .submit-button {
-            padding: 16px 30px;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(15px);
-            color: #ffffff;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-button:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .tracks-section h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 25px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .track-card {
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(15px);
-            border-radius: 16px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .track-card:hover {
-            background: rgba(255, 255, 255, 0.18);
-            transform: translateY(-2px);
-        }
-
-        .track-header {
-            display: flex;
-            justify-content: between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .track-name {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 5px;
-        }
-
-        .track-added-by {
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
-        }
-
-        .track-link {
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            margin-bottom: 15px;
-            word-break: break-all;
-        }
-
-        .vote-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 15px;
-        }
-
-        .vote-form {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .vote-input {
-            padding: 10px 15px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            color: #ffffff;
-            font-weight: 600;
-            width: 80px;
-        }
-
-        .vote-button {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 8px;
-            color: #ffffff;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .vote-button:hover {
-            background: rgba(255, 255, 255, 0.35);
-        }
-
-        .track-rating {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-top: 10px;
-        }
-
-        .empty-tracks {
-            text-align: center;
-            padding: 60px 40px;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-    </style>
+    <title th:text="${playlist.plistName}">Плейлист - Sound Together</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="container">
+<div class="container container-extra-wide fade-in">
     <div class="header">
         <a th:href="@{/playlists}" class="back-button">
-            ← ALL PLAYLISTS
+            ← ВСЕ ПЛЕЙЛИСТЫ
         </a>
 
         <div class="playlist-info">
             <div>
-                <h1 class="playlist-title" th:text="${playlist.plistName}">Playlist Name</h1>
+                <h1 class="playlist-title" th:text="${playlist.plistName}">Название плейлиста</h1>
                 <div class="playlist-meta">
-                    <span>🎵 <span th:text="${playlist.tracks.size()}">0</span> tracks</span>
+                    <span>🎵 <span th:text="${playlist.tracks.size()}">0</span> треков</span>
                     <span> • </span>
-                    <span>👥 <span th:text="${playlist.tracks.![addedBy].?[!#this.isEmpty()].distinct().size()}">0</span> contributors</span>
-                </div>
+                    <span>👥 <span th:text="${playlist.tracks.![addedBy].size()}">0</span> участников</span></div>
             </div>
-        </div>
 
-        <div class="share-info">
-            <div class="share-code" th:text="${playlist.plistShareCode}">SHARECODE</div>
-            <div class="share-url" th:text="${playlist.shareUrl}">Share URL</div>
-        </div>
+            <div class="share-info">
+                <div class="share-code" th:text="${playlist.plistShareCode}">КОД</div>
+                <div class="share-url" th:text="${playlist.shareUrl}">Ссылка для sharing</div>
+            </div>
 
-        <div class="actions">
-            <button class="action-button" onclick="showAddTrackForm()">
-                <span>➕</span>
-                ADD TRACK
-            </button>
-            <form method="get" th:action="@{/playlists/{code}/sort(code=${playlist.plistShareCode})}" style="display: inline;">
-                <button type="submit" class="action-button">
-                    <span>📊</span>
-                    UPDATE RATINGS
+            <div class="actions">
+                <button class="action-button" onclick="showAddTrackForm()">
+                    <span>➕</span>
+                    ДОБАВИТЬ ТРЕК
                 </button>
-            </form>
-        </div>
-
-        <!-- Форма добавления трека -->
-        <div id="addTrackForm" class="add-track-form">
-            <h3 style="color: #ffffff; margin-bottom: 20px; font-family: 'Montserrat';">ADD NEW TRACK</h3>
-            <form method="post" th:action="@{/playlists/{code}/tracks(code=${playlist.plistShareCode})}">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="TRACK NAME" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="link" placeholder="TRACK LINK (OPTIONAL)">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="addedBy" placeholder="YOUR NAME" required>
-                </div>
-                <button type="submit" class="submit-button">ADD TRACK</button>
-                <button type="button" class="submit-button" onclick="hideAddTrackForm()" style="background: rgba(255,0,0,0.3); margin-left: 10px;">CANCEL</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="tracks-section">
-        <h2>TRACKS</h2>
-
-        <div th:each="track : ${playlist.tracks}" class="track-card">
-            <div class="track-header">
-                <div>
-                    <div class="track-name" th:text="${track.trackName}">Track Name</div>
-                    <div class="track-added-by">Added by: <span th:text="${track.addedBy}">User</span></div>
-                </div>
-                <div class="track-rating" th:if="${!track.votes.empty}">
-                    ★ <span th:text="${#aggregates.avg(track.votes.![rate])}">0</span>
-                </div>
-            </div>
-
-            <div th:if="${track.trackLink}" class="track-link">
-                🔗 <a th:href="${track.trackLink}" th:text="${track.trackLink}" style="color: rgba(255,255,255,0.9);">Link</a>
-            </div>
-
-            <div class="vote-section">
-                <form method="post" class="vote-form"
-                      th:action="@{/playlists/{code}/tracks/{id}/votes(code=${playlist.plistShareCode}, id=${track.trackId})}">
-                    <input type="number" name="rate" class="vote-input" placeholder="0-10" min="0" max="10" required>
-                    <input type="text" name="userName" class="vote-input" placeholder="Your name" required style="flex: 1;">
-                    <button type="submit" class="vote-button">VOTE</button>
+                <form method="get" th:action="@{/playlists/{code}/sort(code=${playlist.plistShareCode})}"
+                      style="display: inline;">
+                    <button type="submit" class="action-button">
+                        <span>📊</span>
+                        ОБНОВИТЬ РЕЙТИНГ
+                    </button>
                 </form>
-                <div class="track-rating" th:if="${!track.votes.empty}">
-                    Votes: <span th:text="${track.votes.size()}">0</span> •
-                    Average: <span th:text="${#aggregates.avg(track.votes.![rate])}">0</span>/10
-                </div>
+            </div>
+
+            <!-- Форма добавления трека -->
+            <div id="addTrackForm" class="add-track-form">
+                <h3 style="color: #ffffff; margin-bottom: 20px; font-family: 'Montserrat';">НОВЫЙ ТРЕК</h3>
+                <form method="post" th:action="@{/playlists/{code}/tracks(code=${playlist.plistShareCode})}">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="НАЗВАНИЕ ТРЕКА" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="link" placeholder="ССЫЛКА (НЕОБЯЗАТЕЛЬНО)">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="addedBy" placeholder="ВАШЕ ИМЯ" required>
+                    </div>
+                    <button type="submit" class="submit-button">ДОБАВИТЬ</button>
+                    <button type="button" class="submit-button" onclick="hideAddTrackForm()"
+                            style="background: rgba(255,0,0,0.3); margin-left: 10px;">ОТМЕНА
+                    </button>
+                </form>
             </div>
         </div>
 
-        <div th:if="${playlist.tracks.empty}" class="empty-tracks">
-            <h3 style="color: #ffffff; margin-bottom: 15px; font-family: 'Montserrat';">NO TRACKS YET</h3>
-            <p>Be the first to add music to this playlist!</p>
+        <div class="tracks-section">
+            <h2>ТРЕКИ</h2>
+
+            <div th:each="track : ${playlist.tracks}" class="track-card fade-in-delay-1">
+                <div class="track-header">
+                    <div>
+                        <div class="track-name" th:text="${track.trackName}">Название трека</div>
+                        <div class="track-added-by">Добавил: <span th:text="${track.addedBy}">Пользователь</span></div>
+                    </div>
+                    <div class="track-rating" th:if="${!track.votes.empty}">
+                        ★ <span th:text="${#aggregates.avg(track.votes.![rate])}">0</span>
+                    </div>
+                </div>
+
+                <div th:if="${track.trackLink}" class="track-link">
+                    🔗 <a th:href="${track.trackLink}" th:text="${track.trackLink}"
+                         style="color: rgba(255,255,255,0.9);">Ссылка</a>
+                </div>
+
+                <div class="vote-section">
+                    <form method="post" class="vote-form"
+                          th:action="@{/playlists/{code}/tracks/{id}/votes(code=${playlist.plistShareCode}, id=${track.trackId})}">
+                        <input type="number" name="rate" class="vote-input" placeholder="0-10" min="0" max="10"
+                               required>
+                        <input type="text" name="userName" class="vote-input" placeholder="Ваше имя" required
+                               style="flex: 1;">
+                        <button type="submit" class="vote-button">ГОЛОСОВАТЬ</button>
+                    </form>
+                    <div class="track-rating" th:if="${!track.votes.empty}">
+                        Голосов: <span th:text="${track.votes.size()}">0</span> •
+                        Среднее: <span th:text="${#aggregates.avg(track.votes.![rate])}">0</span>/10
+                    </div>
+                </div>
+            </div>
+
+            <div th:if="${playlist.tracks.empty}" class="empty-tracks fade-in-delay-2">
+                <h3 style="color: #ffffff; margin-bottom: 15px; font-family: 'Montserrat';">ПОКА НЕТ ТРЕКОВ</h3>
+                <p>Будьте первым, кто добавит музыку в этот плейлист!</p>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-    function showAddTrackForm() {
-        document.getElementById('addTrackForm').classList.add('visible');
-    }
+    <script>
+        function showAddTrackForm() {
+            document.getElementById('addTrackForm').classList.add('visible');
+        }
 
-    function hideAddTrackForm() {
-        document.getElementById('addTrackForm').classList.remove('visible');
-    }
-</script>
+        function hideAddTrackForm() {
+            document.getElementById('addTrackForm').classList.remove('visible');
+        }
+    </script>
 </body>
 </html>

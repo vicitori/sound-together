@@ -4,316 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sound Together - Главная</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* ФОН - ВСТАВЬ СВОЮ КАРТИНКУ СЮДА */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://i.pinimg.com/736x/b4/bb/7c/b4bb7cd54de59370aef889f3240790d7.jpg'); /* ЗАМЕНИ НА СВОЮ КАРТИНКУ */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: -2;
-        }
-
-        /* Полупрозрачный оверлей поверх картинки */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 50px 40px;
-            margin-top: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow:
-                0 25px 50px rgba(0, 0, 0, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 45px;
-        }
-
-        .logo h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3rem;
-            font-weight: 900;
-            color: #ffffff;
-            margin-bottom: 12px;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-            letter-spacing: -0.5px;
-        }
-
-        .logo p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .section {
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 35px;
-            margin-bottom: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        }
-
-        .section h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 28px;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        input {
-            width: 100%;
-            padding: 18px 20px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 16px;
-            font-size: 1.1rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            color: #ffffff;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        input:focus {
-            outline: none;
-            border-color: rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 500;
-        }
-
-        button {
-            width: 100%;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(15px);
-            color: #ffffff;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            border-radius: 16px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            font-family: 'Montserrat', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s;
-        }
-
-        button:hover {
-            background: rgba(255, 255, 255, 0.35);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        button:hover::before {
-            left: 100%;
-        }
-
-        button:active {
-            transform: translateY(-1px);
-        }
-
-        .link-button {
-            display: block;
-            text-align: center;
-            padding: 18px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            color: #ffffff;
-            text-decoration: none;
-            border: 2px solid rgba(255, 255, 255, 0.25);
-            border-radius: 16px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-            margin-top: 28px;
-            font-size: 1.1rem;
-        }
-
-        .link-button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        .code-input {
-            font-weight: 700;
-            text-align: center;
-            letter-spacing: 2px;
-            font-size: 1.3rem;
-        }
-
-        .hint {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.95rem;
-            margin-top: 10px;
-            display: block;
-            font-weight: 500;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Анимация появления */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .container {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .section {
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        .section:nth-child(2) {
-            animation-delay: 0.4s;
-        }
-
-        .link-button {
-            animation: fadeInUp 0.8s ease-out 0.6s both;
-        }
-
-        /* Сообщение об ошибке */
-        .error-message {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            color: #ffffff;
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 0.8s ease-out;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="container">
-    <!-- Сообщение об ошибке -->
+<div class="container fade-in">
     <div th:if="${error}" class="error-message">
-        ⚠️ <span th:text="${error}">Ошибка</span>
+        <span th:text="${error}">Ошибка</span>
     </div>
 
-    <div class="logo">
+    <div class="logo fade-in-delay-1">
         <h1>SOUND TOGETHER</h1>
-        <p>COLLABORATIVE MUSIC EXPERIENCE</p>
+        <p>СОЗДАВАЙТЕ МУЗЫКУ ВМЕСТЕ</p>
     </div>
 
-    <!-- Создание плейлиста -->
-    <div class="section">
-        <h2>🎵 CREATE PLAYLIST</h2>
-        <form method="post" action="/playlists">
+    <div class="section fade-in-delay-1">
+        <h2>🎵 СОЗДАТЬ ПЛЕЙЛИСТ</h2>
+        <form method="post" th:action="@{/playlists}">
             <div class="form-group">
-                <input type="text" name="name" placeholder="PLAYLIST NAME" required>
+                <input type="text" name="name" placeholder="НАЗВАНИЕ ПЛЕЙЛИСТА" required>
             </div>
             <div class="form-group">
-                <input type="text" name="userName" placeholder="YOUR NAME" required>
+                <input type="text" name="userName" placeholder="ВАШЕ ИМЯ" required>
             </div>
             <button type="submit">
                 <span>⚡</span>
-                CREATE PLAYLIST
+                СОЗДАТЬ ПЛЕЙЛИСТ
             </button>
         </form>
     </div>
 
-    <!-- Присоединиться к существующему плейлисту -->
-    <div class="section">
-        <h2>🔗 JOIN PLAYLIST</h2>
-        <form method="get" action="/playlists/join">
+    <div class="section fade-in-delay-2">
+        <h2>🔗 ПРИСОДИНИТЬСЯ К ПЛЕЙЛИСТУ</h2>
+        <form method="get" th:action="@{/playlists/find}">
             <div class="form-group">
-                <input type="text" name="code" placeholder="ACCESS CODE"
+                <input type="text" name="code" placeholder="КОД ПЛЕЙЛИСТА"
                        class="code-input" required maxlength="8">
-                <span class="hint">8-character unique code</span>
+                <span class="hint">8-СИМВОЛЬНЫЙ КОД</span>
             </div>
             <button type="submit">
                 <span>🚀</span>
-                JOIN PLAYLIST
+                НАЙТИ ПЛЕЙЛИСТ
             </button>
         </form>
     </div>
 
-    <a th:href="@{/playlists}" class="link-button">
-        📋 VIEW ALL PLAYLISTS
+    <a th:href="@{/playlists}" class="link-button fade-in-delay-3">
+        📋 ВСЕ ПЛЕЙЛИСТЫ
     </a>
 </div>
 </body>

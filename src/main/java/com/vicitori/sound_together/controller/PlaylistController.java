@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class PlaylistController {
-    private PlaylistService service;
+    private final PlaylistService service;
 
     public PlaylistController(PlaylistService service) {
         this.service = service;
@@ -29,7 +30,7 @@ public class PlaylistController {
     }
 
     @PostMapping("/playlists")
-    public String createPlaylist(@RequestParam String name) {
+    public String createPlaylist(@RequestParam String name, @RequestParam String userName) {
         Playlist pl = service.createPlist(name);
         return "redirect:/playlists/" + pl.getPlistShareCode();
     }
@@ -39,5 +40,21 @@ public class PlaylistController {
         Playlist pl = service.getPlistByShareCode(plistShareCode).orElseThrow(() -> new RuntimeException("playlist with share code " + plistShareCode + " not found. try to input share code again."));
         model.addAttribute("playlist", pl);
         return "playlist";
+    }
+
+    @GetMapping("/playlists/find")
+    public String findPlaylist(@RequestParam String plistShareCode, RedirectAttributes redirectAttributes) {
+        if (service.getPlistByShareCode(plistShareCode).isPresent()) {
+            return "redirect:/playlists/" + plistShareCode;
+        } else {
+            redirectAttributes.addFlashAttribute("error", "playlist with share code " + plistShareCode + " not found.");
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/playlists/{plistShareCode}/sort")
+    public String sortPlaylistByRating(@PathVariable String plistShareCode) {
+        service.sortPlaylistByRating(plistShareCode);
+        return "redirect:/playlists/" + plistShareCode;
     }
 }

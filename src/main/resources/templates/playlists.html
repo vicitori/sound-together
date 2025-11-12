@@ -3,234 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Playlists - Sound Together</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://i.pinimg.com/736x/b4/bb/7c/b4bb7cd54de59370aef889f3240790d7.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: -2;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 40px;
-            margin-top: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow:
-                0 25px 50px rgba(0, 0, 0, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .header h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: #ffffff;
-            margin-bottom: 10px;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        }
-
-        .header p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            color: #ffffff;
-            text-decoration: none;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
-        }
-
-        .back-button:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .playlist-grid {
-            display: grid;
-            gap: 20px;
-        }
-
-        .playlist-card {
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .playlist-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.18);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .playlist-header {
-            display: flex;
-            justify-content: between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .playlist-name {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #ffffff;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            margin-bottom: 8px;
-        }
-
-        .playlist-code {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-weight: 700;
-            color: #ffffff;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        .playlist-stats {
-            display: flex;
-            gap: 20px;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-
-        .playlist-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(15px);
-            color: #ffffff;
-            text-decoration: none;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            border-radius: 12px;
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .playlist-link:hover {
-            background: rgba(255, 255, 255, 0.35);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: translateY(-2px);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 60px 40px;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .empty-state a {
-            color: #ffffff;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .empty-state a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title>Все плейлисты - Sound Together</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="container">
+<div class="container container-wide fade-in">
     <a th:href="@{/}" class="back-button">
-        ← BACK TO HOME
+        ← НА ГЛАВНУЮ
     </a>
 
     <div class="header">
-        <h1>ALL PLAYLISTS</h1>
-        <p>Discover and join music collections</p>
+        <h1>ВСЕ ПЛЕЙЛИСТЫ</h1>
+        <p>НАЙДИ СВОЮ МУЗЫКУ</p>
     </div>
 
     <div class="playlist-grid">
-        <div th:each="playlist : ${playlists}" class="playlist-card">
+        <div th:each="playlist : ${playlists}" class="playlist-card fade-in-delay-1">
             <div class="playlist-header">
                 <div>
-                    <div class="playlist-name" th:text="${playlist.plistName}">Playlist Name</div>
+                    <div class="playlist-name" th:text="${playlist.plistName}">Название плейлиста</div>
                     <div class="playlist-stats">
-                        <span>🎵 <span th:text="${playlist.tracks.size()}">0</span> tracks</span>
-                        <span>👥 <span th:text="${playlist.tracks.![addedBy].?[!#this.isEmpty()].distinct().size()}">0</span> contributors</span>
+                        <span>🎵 <span th:text="${playlist.tracks.size()}">0</span> треков</span>
+                        <span>👥 <span
+                                th:text="${T(java.util.HashSet).new(playlist.tracks.![addedBy].?[!#this.isEmpty()]).size()}">0</span> участников</span>
                     </div>
                 </div>
-                <div class="playlist-code" th:text="${playlist.plistShareCode}">CODE</div>
+                <div class="playlist-code" th:text="${playlist.plistShareCode}">КОД</div>
             </div>
             <a th:href="@{/playlists/{code}(code=${playlist.plistShareCode})}" class="playlist-link">
                 <span>🎧</span>
-                OPEN PLAYLIST
+                ОТКРЫТЬ ПЛЕЙЛИСТ
             </a>
         </div>
 
-        <div th:if="${playlists.empty}" class="empty-state">
-            <h3 style="color: #ffffff; margin-bottom: 15px; font-family: 'Montserrat';">NO PLAYLISTS YET</h3>
-            <p>Be the first to create amazing music collection!</p>
-            <a th:href="@{/}">Create your first playlist →</a>
+        <div th:if="${playlists.empty}" class="empty-state fade-in-delay-2">
+            <h3 style="color: #ffffff; margin-bottom: 15px; font-family: 'Montserrat';">ПОКА НЕТ ПЛЕЙЛИСТОВ</h3>
+            <p>Создайте первый плейлист и начните собирать музыку!</p>
+            <a th:href="@{/}">Создать плейлист →</a>
         </div>
     </div>
 </div>

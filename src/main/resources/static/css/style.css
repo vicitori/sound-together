@@ -1,0 +1,727 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ФОН */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://i.pinimg.com/736x/b4/bb/7c/b4bb7cd54de59370aef889f3240790d7.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+}
+
+/* Полупрозрачный оверлей поверх картинки */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+/* КОНТЕЙНЕРЫ РАЗНОЙ ШИРИНЫ */
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 50px 40px;
+    margin-top: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.container-wide {
+    max-width: 800px;
+    padding: 40px;
+    margin-top: 40px;
+}
+
+.container-extra-wide {
+    max-width: 1200px; /* Увеличил для десктопа */
+    padding: 40px;
+    margin-top: 40px;
+}
+
+/* ЛОГОТИП И ЗАГОЛОВКИ */
+.logo {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.logo h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 12px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    letter-spacing: -0.5px;
+}
+
+.logo p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.page-header p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.header p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* СЕКЦИИ */
+.section {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 35px;
+    margin-bottom: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 28px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ФОРМЫ */
+.form-group {
+    margin-bottom: 24px;
+}
+
+input {
+    width: 100%;
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+.code-input {
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 1.3rem;
+}
+
+/* КНОПКИ - ИСПРАВЛЕННЫЕ СТИЛИ */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.button-group button {
+    flex: 1;
+    min-width: 200px; /* Минимальная ширина для десктопа */
+}
+
+button {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* По умолчанию полная ширина */
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+/* Кнопки в строках и колонках */
+.buttons-row {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.buttons-row button {
+    flex: 1;
+    min-width: 180px;
+}
+
+.buttons-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.action-button {
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.action-button:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+/* ССЫЛКИ-КНОПКИ */
+.link-button {
+    display: block;
+    text-align: center;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    color: #ffffff;
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    margin-top: 28px;
+    font-size: 1.1rem;
+}
+
+.link-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    color: #ffffff;
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+/* ПОДСКАЗКИ */
+.hint {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    margin-top: 10px;
+    display: block;
+    font-weight: 500;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* КАРТОЧКИ ПЛЕЙЛИСТОВ И ТРЕКОВ */
+.playlist-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Адаптивная сетка */
+}
+
+.playlist-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.playlist-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.playlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.playlist-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 8px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.playlist-code {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+}
+
+.playlist-stats {
+    display: flex;
+    gap: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.playlist-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.playlist-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    color: #ffffff;
+    text-decoration: none;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.playlist-link:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+}
+
+/* ТРЕКИ */
+.track-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    border-radius: 16px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.track-card:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+.track-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.track-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.track-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.track-added-by {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.track-link {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    margin-bottom: 15px;
+    word-break: break-all;
+}
+
+.track-rating {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+/* ФОРМЫ ГОЛОСОВАНИЯ */
+.vote-section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.vote-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.vote-input {
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: #ffffff;
+    font-weight: 600;
+    width: 80px;
+}
+
+.vote-button {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: auto;
+}
+
+.vote-button:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+/* ФОРМЫ ДОБАВЛЕНИЯ ТРЕКОВ */
+.add-track-form {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    margin-bottom: 30px;
+    display: none;
+}
+
+.add-track-form.visible {
+    display: block;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 0;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.submit-button {
+    padding: 16px 30px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(15px);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.submit-button:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+.cancel-button {
+    padding: 16px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: auto;
+}
+
+.cancel-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* ИНФОРМАЦИЯ О ПЛЕЙЛИСТЕ */
+.playlist-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.playlist-title-section {
+    flex: 1;
+    min-width: 300px;
+}
+
+.playlist-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+}
+
+.playlist-meta {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.playlist-actions-main {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.share-info {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    margin-bottom: 30px;
+}
+
+.share-code {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.share-url {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    word-break: break-all;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.tracks-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 25px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ ДЕСКТОПА */
+@media (min-width: 1200px) {
+    .container-extra-wide {
+        max-width: 1400px;
+    }
+
+    .playlist-grid {
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    }
+
+    .track-header {
+        flex-wrap: nowrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+        margin-top: 30px;
+    }
+
+    .playlist-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .buttons-row {
+        flex-direction: column;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+}
